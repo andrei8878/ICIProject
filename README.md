@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ICIProject
 
 # USE : Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
@@ -222,3 +223,6 @@ body {
   /* animate the fly out of the particle and its fade out at the end */
   -webkit-animation: position 2.45s linear 0s infinite;
 }
+=======
+# ICIProject
+>>>>>>> ce01398951f66f82eab7deccaa6f71b29d48a5f6
