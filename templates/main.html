@@ -1,0 +1,111 @@
+{%extends 'base.html'%}
+{%block head%}
+<title>CogniPlay</title>
+{%endblock%}
+{%block body%}
+    <div class="navbar" id="navbar">
+        <!-- HomePage Navbar Title -->
+        <h1 class="navbar-title"><img src="{{url_for('static',filename='images/brain.png')}}" class ="navbar-logo">CogniPlay</h1>
+        <!-- HomePage Navbar List -->
+        <!-- O lista ordonata [<ol>] ce primeste trei elemente [<li>] -> ["games","help","credits"] ,fiecare continand un buton de redirectionare [<a href>]-->
+        <ol class="navbar-buttons">
+            <li>
+                <a href="/games">
+                    Games
+                    <div class="underline"></div>
+                </a>
+            </li>
+            <li>
+                <a href="/help">
+                    Help
+                    <div class="underline"></div>
+                </a>
+            </li>
+            <li>
+                <a href="/credits">
+                    Credits
+                    <div class="underline"></div>
+                </a>
+            </li>
+        </ol>
+        <!-- HomePage Navbar Hamburger -->
+        <!-- Verificam statusul "hamburger-ului" printr-un input de tip checkbox -->
+        <!-- Cand este apasat , checkbox-u "returneaza" true sau false,
+             folosind metoda aceasta putem anima cu usurinta butonul "hamburger" ce serveste ca si meniu.
+        -->
+        <input class="hamburger-check" id="hamburger-check" type="checkbox">
+        <label for="hamburger-check" class="hamburger-label">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </label>    
+    </div>
+    <!-- HomePage Mobile Navbar -->
+    <div class="navbar-mobile-menu" id="navbar-mobile-menu">
+        <ol class="navbar-mobile-buttons">
+            <li>
+                <a href="/games">
+                    Games
+                </a>
+            </li>
+            <li>
+                <a href="/help">
+                    Help
+                </a>
+            </li>
+            <li>
+                <a href="/credits">
+                    Credits
+                </a>
+            </li>
+        </ol>
+    </div>
+
+
+    
+    <main> <!-- main = se focuseaza pe continul principal al paginii. -->
+        <section class="heroPage-section" id="heroPage-section"> <!-- section = parametrul nostru de lucru -->
+            <div class="heroPage">
+                <div class="glow1"></div>
+                <div class="glow2"></div>
+                <!--
+                    Partea de "Hero Page" reprezinta zona/aria principala a paginii noastre,ofera user-ului un mic rezumat despre ce consta 
+                    website-ul nostru.
+                -->
+                
+                <!-- <img src= "{{url_for('static',filename='images/brain.png')}}" class = "hero-image1" id="hero-image1"> -->
+                <h1 class="heroPage-text1" id="heroPage-h1">
+                    THINK FAST
+                </h1>
+                <h2 class="heroPage-text2" id="heroPage-text2">
+                    THINK <span class="heroPage-text2-span" id="heroPage-text2-span">SMART</span>
+                </h2>
+                <div class="heroPage-paragraph">
+                    <p class="heroPage-pa" id="herooPage-pa">
+                        Challenge your mind with our collection of games designed to test your cognitive skills.Sharpen your memory , boost your focus and enhance your problem solving skills in a fun and engaging way.
+                    </p>
+                </div>
+
+                <div class="heroPage-buttons">
+                    <div class="heroPage-button-play" id="heroPage-button-play">
+                        <h1 class="heroPage-button-play-h1">Play now</h1>
+                    </div>
+                        <div class="heroPage-button-play2" id="heroPage-button-play2">
+                        <h1 class="heroPage-button-play-h2">Explore Games</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page1-section" id="page1-section">
+            <div class="page1">
+                <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt voluptates laboriosam asperiores dolor eaque repudiandae quibusdam suscipit cupiditate quidem, minima obcaecati aliquid architecto provident illum. Sed asperiores doloremque magni. Doloremque?</h1>
+            </div>
+        </section>
+        <section class="page2-section" id="page2-section">
+            <div class="page2">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt  Doloremque?</h2>
+            </div>
+        </section>
+    </main>
+{%endblock%}
