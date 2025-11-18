@@ -1,0 +1,241 @@
+{%extends 'base.html'%}
+{%block head%}
+<title>CogniPlay</title>
+{%endblock%}
+{%block body%}
+    <div class="navbar" id="navbar">
+        <!-- HomePage Navbar Title -->
+        <h1 class="navbar-title"><img src="{{url_for('static',filename='images/brain.png')}}" class ="navbar-logo">CogniPlay</h1>
+        <!-- HomePage Navbar List -->
+        <!-- O lista ordonata [<ol>] ce primeste trei elemente [<li>] -> ["games","help","credits"] ,fiecare continand un buton de redirectionare [<a href>]-->
+        <ol class="navbar-buttons">
+            <li>
+                <a href="/games">
+                    Games
+                    <div class="underline"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#page1-section">
+                    Help
+                    <div class="underline"></div>
+                </a>
+            </li>
+            <li>
+                <a href="/credits">
+                    Credits
+                    <div class="underline"></div>
+                </a>
+            </li>
+        </ol>
+        <!-- HomePage Navbar Hamburger -->
+        <!-- Verificam statusul "hamburger-ului" printr-un input de tip checkbox -->
+        <!-- Cand este apasat , checkbox-u "returneaza" true sau false,
+             folosind metoda aceasta putem anima cu usurinta butonul "hamburger" ce serveste ca si meniu.
+        -->
+        <input class="hamburger-check" id="hamburger-check" type="checkbox">
+        <label for="hamburger-check" class="hamburger-label">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </label>    
+    </div>
+    <!-- HomePage Mobile Navbar -->
+    <div class="navbar-mobile-menu" id="navbar-mobile-menu">
+        <ol class="navbar-mobile-buttons">
+            <li>
+                <a href="/games">
+                    Games
+                </a>
+            </li>
+            <li>
+                <a href="#page1-section">
+                    Help
+                </a>
+            </li>
+            <li>
+                <a href="/credits">
+                    Credits
+                </a>
+            </li>
+        </ol>
+    </div>
+
+
+    
+    <main> <!-- main = se focuseaza pe continul principal al paginii. -->
+        <section class="heroPage-section" id="heroPage-section"> <!-- section = parametrul nostru de lucru -->
+            <div class="heroPage">
+                <div class="glow1"></div>
+                <div class="glow2"></div>
+                <!--
+                    Partea de "Hero Page" reprezinta zona/aria principala a paginii noastre,ofera user-ului un mic rezumat despre ce consta 
+                    website-ul nostru.
+                -->
+                
+                <!-- <img src= "{{url_for('static',filename='images/brain.png')}}" class = "hero-image1" id="hero-image1"> -->
+                <h1 class="heroPage-text1" id="heroPage-h1">
+                    THINK FAST
+                </h1>
+                <h2 class="heroPage-text2" id="heroPage-text2">
+                    THINK <span class="heroPage-text2-span" id="heroPage-text2-span">SMART</span>
+                </h2>
+                <div class="heroPage-paragraph">
+                    <p class="heroPage-pa" id="herooPage-pa">
+                        Challenge your mind with our collection of games designed to test your cognitive skills.Sharpen your memory , boost your focus and enhance your problem solving skills in a fun and engaging way.
+                    </p>
+                </div>
+
+                <div class="heroPage-buttons">
+                    <div class="heroPage-button-play" id="heroPage-button-play">
+                        <h1 class="heroPage-button-play-h1">Play now</h1>
+                    </div>
+                        <div class="heroPage-button-play2" id="heroPage-button-play2">
+                        <h1 class="heroPage-button-play-h2">Explore Games</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page1-section" id="page1-section">
+            <div class="page1-texts">
+                <h1 class ="page1-upper-h1"  id="page1-upper-h1" >WHY CHOOSE COGNIPLAY</h1>
+                <h1 class ="page1-main-h1" id="page1-main-h1">A Smarter Way To Train Your Brain</h1>
+                <p class="page1-description" id="page1-description">Train your brain with our collection of games and go beyond your own brain limits.</p>
+            </div>
+            <div class="page1-infoCards" id="page1-infoCards">
+                <div class="page1-card">
+                    <div class="page1-cardbox" id="page1-cardbox">
+                        <svg class="cardbox-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M9 22C9 22.5523 8.55228 23 8 23C7.44772 23 7 22.5523 7 22C7 21.4477 7.44772 21 8 21C8.55228 21 9 21.4477 9 22ZM13 22C13 22.5523 12.5523 23 12 23C11.4477 23 11 22.5523 11 22C11 21.4477 11.4477 21 12 21C12.5523 21 13 21.4477 13 22ZM16 23C16.5523 23 17 22.5523 17 22C17 21.4477 16.5523 21 16 21C15.4477 21 15 21.4477 15 22C15 22.5523 15.4477 23 16 23Z"
+                                fill="currentColor"
+                            />
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M9 2C9 2.55228 8.55228 3 8 3C7.44772 3 7 2.55228 7 2C7 1.44772 7.44772 1 8 1C8.55228 1 9 1.44772 9 2ZM13 2C13 2.55228 12.5523 3 12 3C11.4477 3 11 2.55228 11 2C11 1.44772 11.4477 1 12 1C12.5523 1 13 1.44772 13 2ZM16 3C16.5523 3 17 2.55228 17 2C17 1.44772 16.5523 1 16 1C15.4477 1 15 1.44772 15 2C15 2.55228 15.4477 3 16 3ZM9 22C9 22.5523 8.55228 23 8 23C7.44772 23 7 22.5523 7 22C7 21.4477 7.44772 21 8 21C8.55228 21 9 21.4477 9 22ZM13 22C13 22.5523 12.5523 23 12 23C11.4477 23 11 22.5523 11 22C11 21.4477 11.4477 21 12 21C12.5523 21 13 21.4477 13 22ZM16 23C16.5523 23 17 22.5523 17 22C17 21.4477 16.5523 21 16 21C15.4477 21 15 21.4477 15 22C15 22.5523 15.4477 23 16 23ZM23 16C23 15.4477 22.5523 15 22 15C21.4477 15 21 15.4477 21 16C21 16.5523 21.4477 17 22 17C22.5523 17 23 16.5523 23 16ZM23 12C23 11.4477 22.5523 11 22 11C21.4477 11 21 11.4477 21 12C21 12.5523 21.4477 13 22 13C22.5523 13 23 12.5523 23 12ZM22 7C22.5523 7 23 7.44771 23 8C23 8.55229 22.5523 9 22 9C21.4477 9 21 8.55229 21 8C21 7.44771 21.4477 7 22 7ZM2 15C2.55228 15 3 15.4477 3 16C3 16.5523 2.55228 17 2 17C1.44772 17 1 16.5523 1 16C1 15.4477 1.44772 15 2 15ZM2 11C2.55228 11 3 11.4477 3 12C3 12.5523 2.55228 13 2 13C1.44772 13 1 12.5523 1 12C1 11.4477 1.44772 11 2 11ZM3 8C3 7.44771 2.55228 7 2 7C1.44772 7 1 7.44771 1 8C1 8.55229 1.44772 9 2 9C2.55228 9 3 8.55229 3 8ZM17 6H7C6.44772 6 6 6.44772 6 7V17C6 17.5523 6.44772 18 7 18H17C17.5523 18 18 17.5523 18 17V7C18 6.44772 17.5523 6 17 6ZM7 4C5.34315 4 4 5.34315 4 7V17C4 18.6569 5.34315 20 7 20H17C18.6569 20 20 18.6569 20 17V7C20 5.34315 18.6569 4 17 4H7ZM14 10H10V14H14V10ZM8 8V16H16V8H8Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </div>
+                    <h1 class="page1-cardText" id="page1-cardText">Improve Memory</h1>
+                    <p class="page1-cardDesc" id="page1-cardDesc">Strengthen your recall abilities and short-term memory with targeted exercises.</p>
+                </div>
+                <div class="page1-card">
+                    <div class="page1-cardbox" id="page1-cardbox">  
+                        <svg class = "cardbox-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            >
+                            <path
+                                d="M12 17C14.2091 17 16 15.2091 16 13H8C8 15.2091 9.79086 17 12 17Z"
+                                fill="currentColor"
+                            />
+                            <path
+                                d="M10 10C10 10.5523 9.55228 11 9 11C8.44772 11 8 10.5523 8 10C8 9.44772 8.44772 9 9 9C9.55228 9 10 9.44772 10 10Z"
+                                fill="currentColor"
+                            />
+                            <path
+                                d="M15 11C15.5523 11 16 10.5523 16 10C16 9.44772 15.5523 9 15 9C14.4477 9 14 9.44772 14 10C14 10.5523 14.4477 11 15 11Z"
+                                fill="currentColor"
+                            />
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12Z"
+                                fill="currentColor"
+                            />
+                        </svg></div>
+                    <h1 class="page1-cardText" id="page1-cardText">Enhance Focus</h1>
+                    <p class="page1-cardDesc" id="page1-cardDesc">Increase your attention span and concetration for better productivity in daily tasks.</p>
+                </div>
+                <div class="page1-card">
+                    <div class="page1-cardbox" id="page1-cardbox">
+                        <svg class="cardbox-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            >
+                            <path
+                                d="M1.41421 16.4322L0 15.018L7.07107 7.94693L13.435 14.3109L17.6777 10.0682L15.9353 8.32587L22.6274 6.53271L20.8343 13.2248L19.0919 11.4825L13.435 17.1393L7.07107 10.7754L1.41421 16.4322Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </div>
+                    <h1 class="page1-cardText" id="page1-cardText">Increase Mental Speed</h1>
+                    <p class="page1-cardDesc" id="page1-cardDesc">Improve your reaction time and process information faster than ever before.</p>
+                </div>
+            </div>
+        </section>
+        <br><br><br><br><br><br><br><br><br>
+        <section class="page2-section" id="page2-section">
+            <div class="page2-texts">
+                <h1 class ="page2-main-h1" id="page2-main-h1">Explore Our Games</h1>
+                <p class="page2-description" id="page2-description">A selection of our enganging,brain boosting games.</p>
+            </div>
+            <div class="page2-infoCards" id="page2-infoCards">
+                <div class="page2-card" id="page2-card">
+                    <div class="overlay" id="overlay"></div>
+                    <div class="card-button" id="card-button">
+                        <a href=><h1>Play Now</h1></a>
+                    </div>
+                    <img src="{{url_for('static',filename='images/game_corsiblock.jpg')}}">
+                    <div class="card-info">
+                        <h1 class="page2-cardText" id="page2-cardText">Corsi Block</h1>
+                        <p class="page2-cardDesc" id="page2-cardDesc">Remember the sequence of blocks.</p>
+                    </div>
+                </div>
+                <div class="page2-card" id="page2-card">
+                    <div class="overlay" id="overlay"></div>
+                    <div class="card-button" id="card-button">
+                        <a href=><h1>Play Now</h1></a>
+                    </div>
+                    <img src="{{url_for('static',filename='images/game_aimtrainer.jpg')}}">
+                    <div class="card-info">
+                        <h1 class="page2-cardText" id="page2-cardText">Aim Trainer</h1>
+                        <p class="page2-cardDesc" id="page2-cardDesc">Improve your accuracy and reaction.</p>
+                    </div>
+                </div>
+                <div class="page2-card" id="page2-card">
+                    <div class="overlay" id="overlay"></div>
+                    <div class="card-button" id="card-button">
+                        <a href=><h1>Play Now</h1></a>
+                    </div>
+                    <img src="{{url_for('static',filename='images/game_reactiontime.jpg')}}">
+                    <div class="card-info">
+                        <h1 class="page2-cardText" id="page2-cardText">Reaction Time</h1>
+                        <p class="page2-cardDesc" id="page2-cardDesc">Measure how fast you can react.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="page2-exploremore"><a href=""><h1>Explore More</h1></a></div>
+        </section>
+        <br><br><br><br><br><br><br><br><br>
+        <section class="page3-reminder">
+            <h1 class="reminder-h1">Soooo...<br>What Are You Waiting For? 🤔</h1>
+            <br><br><br>
+            <p class="reminderDesc">Play our games and unlock your brain's full potential now.</p>
+            <div class="reminderbutton">
+                <a href=""><h1>PLAY NOW</h1></a>
+            </div>
+        </section>
+
+        <section class="footer">
+
+        </section>
+    </main>
+{%endblock%}
