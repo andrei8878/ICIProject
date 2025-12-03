@@ -2,7 +2,8 @@
 {%block head%}
 <title>CogniPlay</title>
 {%endblock%}
-{%block body%}
+{%block styles%}{{super()}}{%endblock%} <!-- super() ne permite sa pastram css-u parinte si ne mai ofera posibilitatea de a adauga alte css-uri-->
+{%block body%} 
     <div class="navbar" id="navbar">
         <!-- HomePage Navbar Title -->
         <h1 class="navbar-title"><img src="{{url_for('static',filename='images/brain.png')}}" class ="navbar-logo">CogniPlay</h1>
@@ -88,10 +89,10 @@
 
                 <div class="heroPage-buttons">
                     <div class="heroPage-button-play" id="heroPage-button-play">
-                        <h1 class="heroPage-button-play-h1">Play now</h1>
+                        <a href="/games" style="text-decoration:  none;"><h1 class="heroPage-button-play-h1">Play now</h1></a>
                     </div>
                         <div class="heroPage-button-play2" id="heroPage-button-play2">
-                        <h1 class="heroPage-button-play-h2">Explore Games</h1>
+                        <a href="/games" style="text-decoration:  none;"><h1 class="heroPage-button-play-h2">Explore Games</h1></a>
                     </div>
                 </div>
             </div>
@@ -191,7 +192,7 @@
                 <div class="page2-card" id="page2-card">
                     <div class="overlay" id="overlay"></div>
                     <div class="card-button" id="card-button">
-                        <a href=><h1>Play Now</h1></a>
+                        <a href="/game/corsiblock"><h1>Play Now</h1></a>
                     </div>
                     <img src="{{url_for('static',filename='images/game_corsiblock.jpg')}}">
                     <div class="card-info">
@@ -202,7 +203,7 @@
                 <div class="page2-card" id="page2-card">
                     <div class="overlay" id="overlay"></div>
                     <div class="card-button" id="card-button">
-                        <a href=><h1>Play Now</h1></a>
+                        <a href="/game/aimtrainer"><h1>Play Now</h1></a>
                     </div>
                     <img src="{{url_for('static',filename='images/game_aimtrainer.jpg')}}">
                     <div class="card-info">
@@ -213,16 +214,16 @@
                 <div class="page2-card" id="page2-card">
                     <div class="overlay" id="overlay"></div>
                     <div class="card-button" id="card-button">
-                        <a href=><h1>Play Now</h1></a>
+                        <a href="/game/reactiontime"><h1>Play Now</h1></a>
                     </div>
-                    <img src="{{url_for('static',filename='images/game_reactiontime.jpg')}}">
+                    <img src="{{url_for('static',filename='images/game_matchtwo.jpg')}}">
                     <div class="card-info">
                         <h1 class="page2-cardText" id="page2-cardText">Reaction Time</h1>
                         <p class="page2-cardDesc" id="page2-cardDesc">Measure how fast you can react.</p>
                     </div>
                 </div>
             </div>
-            <div class="page2-exploremore"><a href=""><h1>Explore More</h1></a></div>
+            <div class="page2-exploremore"><a href="/games"><h1>Explore More</h1></a></div>
         </section>
         <br><br><br><br><br><br><br><br><br>
         <section class="page3-reminder">
@@ -235,7 +236,8 @@
         </section>
 
         <section class="footer">
-
+            <h1>Website made by a genius.</h1>
+            <p>Barau Andrei Cristian</p>
         </section>
     </main>
 {%endblock%}

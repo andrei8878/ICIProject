@@ -1,0 +1,162 @@
+{%extends 'gamehub.html'%}
+{%block head%}
+<title>CogniPlay</title>
+{%endblock%}
+{%block body%}
+    <div class="navbar" id="navbar">
+        <!-- HomePage Navbar Title -->
+        <h1 class="navbar-title"><img src="{{url_for('static',filename='images/brain.png')}}" class ="navbar-logo">CogniPlay Games Hub</h1>    
+        <a href="/games" class="navbar-button"><h1> < Games</h1>
+        </a>
+    </div>
+
+
+    <!-- <div class="footer">
+        <h1 class="footer-text">©2025 CogniPlay | All rights questioned.</h1>
+        <p class="footer-desc">Think Fast->Think Smart</p>
+    </div> -->
+
+    <main>
+        <section class="gameWindow">
+            <div class="gameWindow-playbg">
+                <div class="gameWindow-play">
+                    <div class="gamewindow-playuiStart" id="gamewindow_playuiStart">
+                        <h1>{{game.name}}</h1>
+                        <p>{{game.description}}</p>
+                        <button class="startGame" id="startGame" name="startGame">
+                            <h1>Start Game</h1>
+                        </button>
+                    </div>
+                    <h1 id="gamewindow-h1">[Dynamic Title]</h1>
+                    <p id="gamewindow-p">{{game.gameDesc}}</p>
+                    <div class="gameWindow-score"></div>
+                    <div class="gamewindow-playuiPlay" id="gamewindow-playuiPlay" data-game-id="{{game_id}}">
+                    </div>
+                    <div class="gamewindow-gameOver" id="gamewindow-gameOver">
+                        <h1 class="gameOver-text">Game Over</h1>
+                        <h1 class="gameOver-description">Good effort! Ready for another round?</h1>
+                        <div class="gameOver-scoreShowcase">
+                            <div class="gameOver-circle"></div>
+                            <h1 class="gameOver-score">903</h1>
+                        </div>
+                        <div class="gameOver-container">
+                            <div class="gameOver-containerBox">
+                                <div class="containerBox-container">
+                                    <svg class="gameOver-icon"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M13 15.9C15.2822 15.4367 17 13.419 17 11V4H7V11C7 13.419 8.71776 15.4367 11 15.9V18H9V20H15V18H13V15.9ZM9 6H15V11C15 12.6569 13.6569 14 12 14C10.3431 14 9 12.6569 9 11V6Z"
+                                            fill="currentColor"
+                                        />
+                                        <path d="M18 6H20V11H18V6Z" fill="currentColor" />
+                                        <path d="M6 6H4V11H6V6Z" fill="currentColor" />
+                                    </svg>
+                                    <h1 class="gameOver-bestscoreText">BEST SCORE:</h1>
+                                </div>
+                                <br><h1 class="gameOver-bestscore">5401</h1>
+                            </div>
+                             <div class="gameOver-containerBox">
+                                <div class="containerBox-container">
+                                    <svg class="gameOver-icon"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M13 15.9C15.2822 15.4367 17 13.419 17 11V4H7V11C7 13.419 8.71776 15.4367 11 15.9V18H9V20H15V18H13V15.9ZM9 6H15V11C15 12.6569 13.6569 14 12 14C10.3431 14 9 12.6569 9 11V6Z"
+                                            fill="currentColor"
+                                        />
+                                        <path d="M18 6H20V11H18V6Z" fill="currentColor" />
+                                        <path d="M6 6H4V11H6V6Z" fill="currentColor" />
+                                    </svg>
+                                    <h1 class="gameOver-bestscoreText">BEST SCORE:</h1>
+                                </div>
+                                <br><h1 class="gameOver-bestscore">5401</h1>
+                            </div>
+                        </div>
+                        <div class="gameOver-containerbuttons">
+                            <div class="gameOver-retry" id="gameOver-retry">
+                                <svg class="gameOverbutton-icon"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                    <path
+                                        d="M13.1459 11.0499L12.9716 9.05752L15.3462 8.84977C14.4471 7.98322 13.2242 7.4503 11.8769 7.4503C9.11547 7.4503 6.87689 9.68888 6.87689 12.4503C6.87689 15.2117 9.11547 17.4503 11.8769 17.4503C13.6977 17.4503 15.2911 16.4771 16.1654 15.0224L18.1682 15.5231C17.0301 17.8487 14.6405 19.4503 11.8769 19.4503C8.0109 19.4503 4.87689 16.3163 4.87689 12.4503C4.87689 8.58431 8.0109 5.4503 11.8769 5.4503C13.8233 5.4503 15.5842 6.24474 16.853 7.52706L16.6078 4.72412L18.6002 4.5498L19.1231 10.527L13.1459 11.0499Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                                <h1>Play again</h1>
+                            </div>
+                            <div class="gameOver-menu" id="gameOver-menu">
+                                <svg class="gameOverbutton-icon2"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M21 8.77217L14.0208 1.79299C12.8492 0.621414 10.9497 0.621413 9.77817 1.79299L3 8.57116V23.0858H10V17.0858C10 15.9812 10.8954 15.0858 12 15.0858C13.1046 15.0858 14 15.9812 14 17.0858V23.0858H21V8.77217ZM11.1924 3.2072L5 9.39959V21.0858H8V17.0858C8 14.8767 9.79086 13.0858 12 13.0858C14.2091 13.0858 16 14.8767 16 17.0858V21.0858H19V9.6006L12.6066 3.2072C12.2161 2.81668 11.5829 2.81668 11.1924 3.2072Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                                <h1>Menu</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="gameWindow-scoreboard">
+                
+                <div class="topScore">
+                    <svg class="topScore-icon"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        >
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M13 15.9C15.2822 15.4367 17 13.419 17 11V4H7V11C7 13.419 8.71776 15.4367 11 15.9V18H9V20H15V18H13V15.9ZM9 6H15V11C15 12.6569 13.6569 14 12 14C10.3431 14 9 12.6569 9 11V6Z"
+                            fill="currentColor"
+                        />
+                        <path d="M18 6H20V11H18V6Z" fill="currentColor" />
+                        <path d="M6 6H4V11H6V6Z" fill="currentColor" />
+                    </svg>
+                    <h1 class="topScoreText">Top Score</h1>
+                    <div class="topScore-container">
+                        <h1 class="topScore-score" name="topScore-score">2543</h1>
+                        <h1 class="topScore-time" name="topScore-time"> 0:43</h1>
+                        <h1 class="topScore-date" name="topScore-date">24/11/2025</h1>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+    </main>
+{%endblock%}
+
+
+
+<!-- Ce trebuie facut pentru jocul Corsi Block :
+
+1. Trebuie facuta matricea (3x3) [cu div-uri prin jinja2 si cu id-uri specifice fiecarei celula]
+2. Prin javascript eu trebuie sa aleg din div-ul parinte al matricei un id random si sa ii dau append in lista  + sa fac un contor de nivele , acest contor va fi un limitator de apasari
+3. Cand user-ul apasa pe un button , atunci eu il salvez intr-o lista pe care la sfarsit o compar cu lista originala -->

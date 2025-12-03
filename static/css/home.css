@@ -1,6 +1,9 @@
 /* font-uri importate , sursa : Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+html{
+    min-height: 100vh;
+}
 body{
     background:linear-gradient(to top right, #0f172a, #0e1729, #151f34);
     margin:0;
@@ -18,7 +21,7 @@ keyframe = logica din spatele unei animatii,bazata pe puncte.
 @keyframes textGradient{
     0%{
         background-position: 0% 50%;  /* background-postion = x , y 
-         primeste doua coordonate x si y pentru a pozitia fundalul unui obiect*/
+        primeste doua coordonate x si y pentru a pozitia fundalul unui obiect*/
     }
     100% {
         background-position: 100% 50%;
@@ -45,7 +48,6 @@ keyframe = logica din spatele unei animatii,bazata pe puncte.
     }
 }
 /***************************************************************/
-
 /*
     NAVBAR
 */
@@ -766,8 +768,11 @@ keyframe = logica din spatele unei animatii,bazata pe puncte.
 .footer{
     display: flex;
     position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
-    min-height: 400px;
+    min-height: 200px;
 }
 
 
