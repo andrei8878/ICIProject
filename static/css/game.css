@@ -1,6 +1,18 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+
+
 
 html{
     min-height: 100vh;
@@ -132,8 +144,21 @@ main{
     border-width: 3px;
     flex-direction: column;
 }
+
+/* 
+datad
+
+datad
+datad
+d
+ */
+
+
+
+
+
 .gameWindow-play .gamewindow-playuiStart{
-    display: none;
+    display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
@@ -193,11 +218,11 @@ main{
 
 
 .gameWindow-play .gamewindow-gameOver{
-    display:flex;
+    display:none;
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.461);
+    background-color: rgba(0, 0, 0, 0.244);
     z-index: 5;
     justify-content: center;
     align-items: center;
@@ -217,7 +242,7 @@ main{
     font-style: italic;
     font-size: 60px;
     text-align: center;
-    text-shadow: 0px 0px 10px white;
+    text-shadow: 0px 0px 5px white;
     margin-top: -100px;
 }
 
@@ -376,26 +401,6 @@ main{
     width:25px;
     height: 25px;
 }
-.gameOver-containerbuttons .gameOver-menu{
-    display: flex;
-    position:relative;
-    width: calc(60% - 250px);
-    border: none;
-    border-radius: 10px;
-    height:75px;
-    background-color: #27272a6b;
-    justify-content: center;
-    align-items: center;
-    gap:10px;
-}
-
-.gameOver-menu h1{
-    color:#fafafa;
-    font-family: "Share Tech Mono", monospace;
-    font-weight: 700; 
-    font-size: 35px;
-    font-style: normal;
-}
 
 
 
@@ -431,7 +436,7 @@ main{
 }
 
 .gameWindow-play .gamewindow-playuiPlay{
-    display: none;
+    display: flex;
     position: relative;
     width: auto;
     height: auto;
@@ -441,6 +446,34 @@ main{
     grid-template-columns: repeat(3,1fr);
     gap:10px;
     
+}
+
+.gameWindow-play .playuiStart-panel{
+    display:none;
+    position: absolute;
+    top:10px;
+    left: 10px;
+    width:200px;
+    height: 100px;
+    background-color: #1c242f;
+    border-radius: 10px;
+    border-style:dashed;
+    border-color: #aba5a5;
+    border-width: 3px;
+    z-index: 271;
+    flex-direction: column;
+    
+}
+
+.playuiStart-panel h1{
+    display:flex;
+    position:relative;
+    margin-left:10px;
+    color:#fafafa;
+    font-family: "Share Tech Mono", monospace;
+    font-weight: 700; 
+    font-size: 20px;
+    font-style: normal;
 }
 
 
@@ -491,8 +524,36 @@ main{
 }
 
 
+.gameWindow-play .feedback{
+    display:none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(96, 246, 138, 0.52);
+    z-index: 2712;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeIn .1s ease-in,zoomIn .1s ease-out;
+}
 
-
+.feedback .feedback-h1{
+    position: relative;
+    /* background: linear-gradient(to top,#0a0e81,#1f1fff); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
+    /* background-clip: text; */
+    /* color: transparent; */
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 120px;
+    text-align: center;
+    color : #FFFFFF;
+    /* text-shadow: 0px 0px 15px rgb(100, 191, 255); */
+    /* margin-top: -100px; */
+}
 
 /* joc nou */
 

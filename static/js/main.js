@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const startGameButton = document.getElementById("startGame");
     const gamewindow_h1 = document.getElementById("gamewindow-h1");
     const gamewindow_p = document.getElementById("gamewindow-p");
+    const playuiStart_panel = document.getElementById("playuiStart-panel");
     const game_id = gameplay_Container.dataset.gameId;
 
     startGameButton.addEventListener("click", () => {
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         gameplay_Container.style.display = "grid";
         gamewindow_h1.style.display = "flex";
         gamewindow_p.style.display = "flex";
+        playuiStart_panel.style.display = "flex";
         if (game_id){
             import(`/static/js/games/${game_id}.js`)
                 .then(module => module.initGame(gameplay_Container))
