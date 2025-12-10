@@ -70,7 +70,7 @@ function updateCells(container){
 function handlePlayerClicks(cellEvent){
     if(isPlaying) return;
     if(cellEvent.target.classList.contains("guessed")) return;
-    console.log("Player-ul a apasat butonul: "+cellEvent.target.id)
+    console.log("[DEBUG] Player pressed cell: "+cellEvent.target.id)
     if(!isPlaying && playerSeq.length <2){
         let cell = cellEvent.target;
         if (cell){

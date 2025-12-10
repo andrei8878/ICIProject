@@ -10,63 +10,108 @@ app.permanent_session_lifetime = timedelta(hours=2)
 
 
 
-
+#Dictionar pentru "baza de date" a jocurilor
 games = {
     "corsiblock": {
         "name": "Corsi Block Test",
         "gameDesc": "Repeat the sequence",
-        "description": "Remember the sequence of blocks."
+        "description": "Remember the sequence of blocks.",
+        "genre" : "Memory",
+        "status" : "Ready"
     },
     "aimtrainer": {
         "name": "Aim Trainer Test",
         "gameDesc": "Hit as many green circles as you can , avoid red ones.",
-        "description": "Hit all the green targets , avoid the red ones."
+        "description": "Hit all the green targets , avoid the red ones.",
+        "genre" : "Reaction",
+        "status" : ""
+
     },
     "reactiontime": {
         "name": "Reaction Time Test",
         "gameDesc": "React as fast as you can",
-        "description": "Press the game window as fast as you can when it turns GREEN"
+        "description": "Press the game window as fast as you can when it turns GREEN",
+        "genre" : "Reaction",
+        "status" : ""
+
     },
     "matchtwo": {
         "name": "Match Two Test",
         "gameDesc": "Find And Match two identical tiles.",
-        "description": "Find and match two identical match to win the game."
-    }
+        "description": "Find and match two identical match to win the game.",
+        "genre" : "Reaction",
+        "status" : "Ready"
+    },
+
+    "pattern": {
+        "name": "Identify The Pattern",
+        "gameDesc": "Identify the patterns and solve the problems.",
+        "description": "[THIS CARD IS JUST AN EXAMPLE]",
+        "genre" : "Pattern",
+        "status" : ""
+    },
+
+    "speedmath": {
+        "name": "Speed Math",
+        "gameDesc": "Solve math problems really really really really really fast or die!",
+        "description": "[THIS CARD IS JUST AN EXAMPLE].",
+        "genre" : "Math",
+        "status" : "Ready"
+    },
 }
 
 @app.route("/")
 def homePage():
-    session.permanent = True
+    session.permanent = True #Trebuie declarat doar odata , mentine sesiunea pe nivel global al aplicatiei web 
     return render_template("main.html")
 
 
-@app.route("/games")
+@app.route("/games",methods=['GET','POST'])
 def gamesPage():
     return render_template("games.html")
 
+@app.route("/api/games", methods=['POST'])
+def gamesPage_Update():
+    data = request.get_json()
+    game_genre = data.get('game_genre')
+    print(game_genre)
+    reqGenre = {}
+    if game_genre == "All":
+        for k,v in games.items():
+            reqGenre[k] = v
+        return jsonify({'status':'success','message':'Showing all cards.','return':reqGenre})
+    
+    for k,v in games.items():
+        if v.get("genre") == game_genre:
+            reqGenre[k] = v
+
+    if reqGenre:
+        return jsonify({'status':'success','message':'Showing the selected cards','return':reqGenre})
+    
 
 
 # @app.route("/game/<string:id>",methods=["GET","POST"])
 @app.route("/game/<game_id>", methods=['POST','GET'])
 def gamePage(game_id):
-    game = games.get(game_id)
+    game = games.get(game_id) #preluam cheia
     # data = request.get_json()
     best_score = 0
-    if 'best_scores' in session:
-        best_score = session['best_scores'].get(game_id,0)
+    if 'best_scores' in session: # Verificam daca best_scores este in sesiune
+        best_score = session['best_scores'].get(game_id,0) # Preluam prima valoare a game_id
     if game is None:
         return render_template("games.html")
     return render_template("game.html",game=game,game_id=game_id,best_score=best_score)
 
-
+# Ruta speciala pentru salvarea datelor
 @app.route("/api/save",methods=['POST']) ## Folosim doar POST pentru ca dorim sa modificam doar anumite date
 def save_userData():
-    data = request.get_json()
-    game_id = data.get('game_id')
-    best_score = data.get('best_score')
-    game_score = data.get('game_score')
-    playerseqTime = data.get('playerSeqtime')
-    timestr = data.get('timestr')
+    data = request.get_json() #Primim fetch-u din javascript
+    #Initializam variabilele cu datele oferite din fetch (<-)
+    game_id = data.get('game_id')               # <-
+    best_score = data.get('best_score')         # <-
+    game_score = data.get('game_score')         # <-
+    playerseqTime = data.get('playerSeqtime')   # <-
+    timestr = data.get('timestr')               # <-
 
 
     #Verificam daca datele exista
@@ -95,7 +140,7 @@ def save_userData():
     
     return jsonify({'status':'same','best_score':current_best})
 
-
+# Ruta speciala pentru resetarea datelor
 @app.route("/api/reset",methods=['POST'])
 def resetuserData():
     data = request.get_json()
@@ -112,10 +157,10 @@ def resetuserData():
     return jsonify({'status':'success','best_score':best_score})
 
 
-
+#Functie pentru actualizarea CSV-ului
 def updateUserDataCSV(game_id, current_best,game_score,totaltime,time):
-    session_id = session['session_id']
-    widths = {
+    session_id = session['session_id'] #preluam id-u sesiunii
+    widths = { #Widths pt fiecare fieldname
         "Session ID":40,
         "Game ID":15,
         "Rating":10,
@@ -124,7 +169,7 @@ def updateUserDataCSV(game_id, current_best,game_score,totaltime,time):
         "Total Time": 15,
         "Level Time":100
     }
-    data = {
+    data = { #dictionar cu date despre valorile primite din fetch
         "Session ID":session_id,
         "Game ID":game_id,
         "Rating":rating(game_id,game_score),
@@ -133,22 +178,23 @@ def updateUserDataCSV(game_id, current_best,game_score,totaltime,time):
         "Total Time": totaltime,
         "Level Time": time
     }
-    fieldnames = ["Session ID","Game ID","Rating","Game Score","Best Score","Total Time","Level Time"]
-    file = os.path.isfile("userdata.csv")
+    fieldnames = ["Session ID","Game ID","Rating","Game Score","Best Score","Total Time","Level Time"] # titluri
+    file = os.path.isfile("userdata.csv") #Verificam daca exista fisierul
     with open("userdata.csv",mode="a",newline="",encoding="utf-8") as csvfile:
-        if not file:
+        if not file:# Daca nu exista atunci scriem fieldname-urile in top
             fieldnamesdict = {f: f for f in fieldnames }
             csvfile.write(formatCSV(fieldnamesdict,fieldnames,widths))
-        csvfile.write(formatCSV(data,fieldnames,widths))
+        csvfile.write(formatCSV(data,fieldnames,widths)) 
 
+#Formatam CSV-u pentru a putea fii citit
 def formatCSV(fieldnamedict,fieldnames,widths):
-    line = "| "
+    line = "| " 
     for fieldname in fieldnames:
         val = str(fieldnamedict.get(fieldname,"")).ljust(widths[fieldname])
         line += val + " | "
     return line + "\n"
 
-
+#Sistem de rating bazat pe fiecare joc
 def rating(game_id,game_score):
     if game_id == "corsiblock":
         if game_score >= 1:
@@ -156,6 +202,11 @@ def rating(game_id,game_score):
     elif game_id == "matchtwo":
         if game_score >= 30000:
             return "genius"
-    
+
+
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
