@@ -5,7 +5,7 @@
 {%block body%}
     <div class="navbar" id="navbar">
         <!-- HomePage Navbar Title -->
-        <h1 class="navbar-title"><img src="{{url_for('static',filename='images/brain.png')}}" class ="navbar-logo">CogniPlay Games Hub</h1>    
+        <h1 class="navbar-title" id="navbar-title"><img src="{{url_for('static',filename='images/brain.png')}}" class ="navbar-logo">CogniPlay Games Hub</h1>    
         <a href="/games" class="navbar-button"><h1> < Games</h1>
         </a>
     </div>
@@ -104,6 +104,21 @@
                                     />
                                 </svg>
                                 <h1>Play again</h1>
+                            </div>
+                            <div class="gameOver-retry" id="gameOver-moreData" style="width: calc(40% - 40px);">
+                                <svg class="gameOverbutton-icon"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                    <path
+                                        d="M1.41421 16.4322L0 15.018L7.07107 7.94693L13.435 14.3109L17.6777 10.0682L15.9353 8.32587L22.6274 6.53271L20.8343 13.2248L19.0919 11.4825L13.435 17.1393L7.07107 10.7754L1.41421 16.4322Z"
+                                        fill="currentColor"
+                                    />
+                                </svg>
+                                <h1>More Stats</h1>
                             </div>
                         </div>
                     </div>

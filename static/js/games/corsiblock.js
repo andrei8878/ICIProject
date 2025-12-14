@@ -1,5 +1,6 @@
 const path = window.location.pathname.split("/");
 const game_id = path[2];
+let session_id;
 
 
 //Selectori
@@ -16,9 +17,12 @@ const gamewindow_gameOver = document.getElementById("gamewindow-gameOver");
 const gameOver_score = document.getElementById("gameOver-score");
 const gameOver_bestScore = document.getElementById("gameOver-bestscore");
 const gameOver_timer = document.getElementById("gameOver-timer");
+const test = document.getElementById("navbar-title");
 
 const gameOver_buttonRetry = document.getElementById("gameOver-retry");
+const gameOver_buttonMoreData = document.getElementById("gameOver-moreData");
 gameOver_buttonRetry.addEventListener("click",replayGame);
+gameOver_buttonMoreData.addEventListener("click",redirectMoreData);
 //Variabile
 let currentSeq = [];         // secventa curenta a jocului
 let playerSeq = [];          // secventa curenta a jucatorului
@@ -248,6 +252,11 @@ async function handleFeedback(status){
     feedback.style.display = "none";
 }
 
+
+function redirectMoreData(){
+    window.location.href = `/morestats/${game_id}/${session_id}`;
+}
+
 function sendDataBackend(){
     fetch(`/api/save`,{
         method: 'POST',
@@ -258,6 +267,7 @@ function sendDataBackend(){
             game_id:game_id,
             game_score:gameScore,
             best_score:bestScore,
+            maxSequence:level-1,
             playerSeqtime:playerSeqtime,
             timestr:timestr
         })
@@ -267,6 +277,9 @@ function sendDataBackend(){
         console.log('[FLASK] R:',data);
         if(data.status === "newbest"){
             gameOver_bestScore.textContent = data.best_score;
+            session_id = data.session_id;
+        }else if(data.status === "same"){
+            session_id = data.session_id;
         }
     })
     .catch((error) => {
@@ -286,7 +299,7 @@ function resetDataBackend(){
     })
     .then(response=> response.json())
     .then(data => {
-        console.log('[FLAS] R:',data);
+        console.log('[FLASK] R:',data);
         if(data.status === "success"){
             gameOver_bestScore.textContent = data.best_score;
         }
@@ -295,6 +308,8 @@ function resetDataBackend(){
         console.error('[FETCH] Error:',error);
     });
 }
+
+
 
 
 export function initGame(container){

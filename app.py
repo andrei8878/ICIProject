@@ -112,33 +112,35 @@ def save_userData():
     game_score = data.get('game_score')         # <-
     playerseqTime = data.get('playerSeqtime')   # <-
     timestr = data.get('timestr')               # <-
+    maxSequence = data.get('maxSequence')       # <-
 
 
     #Verificam daca datele exista
-    if (game_id or best_score or game_score or playerseqTime) is None:
+    if (game_id or best_score or game_score or playerseqTime or timestr or maxSequence) is None:
         return jsonify({'status':'rejected','message':'Invalid data'})
 
     if 'session_id' not in session:
         session['session_id'] = str(uuid.uuid4())
     if 'best_scores' not in session:
         session['best_scores'] = {} #facem un nou dictionar pt best_scores
-    
+            
     # session['best_scores'].get(parm1,parm2) , parm1 ,daca exista, ne va da game_id , parm2 este un parametru default in caz ca nu exista game_id
     current_best = session['best_scores'].get(game_id,0)
+    session_id = session['session_id']
     update = False
 
     if game_id:
         if current_best < game_score:
             current_best = game_score
             update = True
-        updateUserDataCSV(game_id,current_best,game_score,timestr,playerseqTime)
+        updateUserDataCSV(game_id,current_best,game_score,timestr,playerseqTime,maxSequence)
     
     if update:
         session['best_scores'][game_id] = game_score
         session.modified = True # !!! trebuie sa anuntam Flask pentru noua modificare
-        return jsonify({'status':'newbest','best_score':current_best})
+        return jsonify({'status':'newbest','best_score':current_best,'session_id':session_id})
     
-    return jsonify({'status':'same','best_score':current_best})
+    return jsonify({'status':'same','best_score':current_best,'session_id':session_id})
 
 # Ruta speciala pentru resetarea datelor
 @app.route("/api/reset",methods=['POST'])
@@ -158,7 +160,7 @@ def resetuserData():
 
 
 #Functie pentru actualizarea CSV-ului
-def updateUserDataCSV(game_id, current_best,game_score,totaltime,time):
+def updateUserDataCSV(game_id, current_best,game_score,totaltime,time,maxSequence):
     session_id = session['session_id'] #preluam id-u sesiunii
     widths = { #Widths pt fiecare fieldname
         "Session ID":40,
@@ -166,8 +168,11 @@ def updateUserDataCSV(game_id, current_best,game_score,totaltime,time):
         "Rating":10,
         "Game Score":12,
         "Best Score": 12,
+        "Max Sequence": 12,
         "Total Time": 15,
         "Level Time":100
+        
+
     }
     data = { #dictionar cu date despre valorile primite din fetch
         "Session ID":session_id,
@@ -175,10 +180,11 @@ def updateUserDataCSV(game_id, current_best,game_score,totaltime,time):
         "Rating":rating(game_id,game_score),
         "Game Score":game_score,
         "Best Score":current_best,
+        "Max Sequence":maxSequence,
         "Total Time": totaltime,
         "Level Time": time
     }
-    fieldnames = ["Session ID","Game ID","Rating","Game Score","Best Score","Total Time","Level Time"] # titluri
+    fieldnames = ["Session ID","Game ID","Rating","Game Score","Best Score","Max Sequence","Total Time","Level Time"] # titluri
     file = os.path.isfile("userdata.csv") #Verificam daca exista fisierul
     with open("userdata.csv",mode="a",newline="",encoding="utf-8") as csvfile:
         if not file:# Daca nu exista atunci scriem fieldname-urile in top
@@ -197,11 +203,91 @@ def formatCSV(fieldnamedict,fieldnames,widths):
 #Sistem de rating bazat pe fiecare joc
 def rating(game_id,game_score):
     if game_id == "corsiblock":
-        if game_score >= 1:
-            return "mediocre"
-    elif game_id == "matchtwo":
-        if game_score >= 30000:
+        if game_score >= 5000:
             return "genius"
+        elif game_score >= 3000:
+            return "impressive"
+        elif game_score >= 1500:
+            return "good"
+        elif game_score >= 500:
+            return "bad"
+        else: 
+            return "None"
+    elif game_id == "matchtwo":
+        if game_score >= 50000:
+            return "impossible"
+        elif game_score >= 35000:
+            return "impressive"
+        elif game_score >= 30000:
+            return "good"
+        elif game_score >= 25000:
+            return "bad"
+        else:
+            return "None"
+    else:
+        return "None"
+
+@app.route("/morestats/<game_id>/<game_session>",methods=['GET','POST'])
+def moreStats(game_id,game_session):
+    print("bruh...")
+    return render_template("morestats.html")
+
+@app.route("/api/morestats/<game_session>",methods=['POST'])
+def getDataMoreStats(game_session):
+    print("game_sesion" + game_session)
+    data = request.get_json()
+    game_id = data.get('game_id')
+    if game_session:
+        print("dupa game_sesion" + game_session)
+        result = readDataCSV(game_id,game_session)
+    rating = []
+    game_score = []
+    best_score = []
+    maxSequence = []
+    total_time = []
+    level_time = []
+    if result:
+        for data in result:
+            if data:
+                rating.append(data["Rating"])
+                game_score.append(data["Game Score"])
+                best_score.append(data["Best Score"])
+                maxSequence.append(data["Max Sequence"])
+                total_time.append(data["Total Time"])
+                level_time.append(data["Level Time"])
+    else:
+        print("Failed to receive data from CSV")
+        return
+    return jsonify({'status':'success','ms_rating':rating,'ms_gameScore':game_score,'ms_bestScore':best_score,'ms_maxSequence':maxSequence,'ms_totalTime':total_time,'ms_levelTime':level_time})
+
+
+def readDataCSV(game_id,game_session):
+    file = os.path.isfile("userdata.csv")
+    result = []
+    with open("userdata.csv",encoding="utf-8") as csvfile:
+        if not file:
+            print("Erorr: File does not exist")
+            return
+        lines = csvfile.readlines()
+    
+    for line in lines:
+        if line.strip().startswith("|") and not line.strip().startswith("| Session ID"):
+            parts = [part.strip() for part in line.split("|")[1:-1]]
+            row = {
+                "Session ID": parts[0],
+                "Game ID": parts[1],
+                "Rating": parts[2],
+                "Game Score": parts[3],
+                "Best Score": parts[4],
+                "Max Sequence": parts[5],
+                "Total Time": parts[6],
+                "Level Time": parts[7]
+            }
+            if row["Session ID"] == game_session and row["Game ID"] == game_id:
+                result.append(row)
+    return result
+        
+        
 
 
 
