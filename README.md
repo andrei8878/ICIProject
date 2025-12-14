@@ -8,6 +8,9 @@
 ![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 ![Tech](https://img.shields.io/badge/Tech-Python%20%7C%20Flask-blue?style=for-the-badge&logo=python)
 ![Tech](https://img.shields.io/badge/Tech-JavaScript-yellow?style=for-the-badge&logo=javascript)
+![HTML](https://img.shields.io/badge/Tech-HTML5-orange?style=for-the-badge&logo=html5)
+![CSS](https://img.shields.io/badge/Tech-CSS3-blue?style=for-the-badge&logo=css3)
+
 
 ---
 
