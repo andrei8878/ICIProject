@@ -55,18 +55,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 ms_maxSequence.textContent = getBestSequence(maxSequence);
 
 
-                //Am folosit chart.js ! NU AM HABAR CUM FUNCTIONEAZA , am urmarit un tutorial :)
+                //Am folosit chart.js pt grafic !
                 //Chart
                 const gameScores = game_score.map(val=>parseInt(val)); // asiguram ca scorurile sunt int-uri
-                
+                const maxSeq = maxSequence.map(val=>parseInt(val));
                 //Etichete
-                const gameLabels = Array.from({length:gameScores.length},(_, i)=> `Joc${i+1}`);
+                const gameLabels = Array.from({length:gameScores.length},(_, i)=> `Game${i+1}`);
+                const seqLabels = Array.from({length:maxSeq.length},(_,i)=> `Sequence${i+1}`);
                 new Chart(document.getElementById('scoreChart'),{
                     type: 'line',
                     data:{
                         labels: gameLabels,
                         datasets: [{
-                            label: 'Scor Joc',
+                            label: 'Game Score',
                             data: gameScores,
                             borderColor: 'rgb(75,192,192)',
                             tension: 0.1,
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         plugins: {
                             title: {
                                 display: true,
-                                text: 'Varia scorului in timp',
+                                text: 'Game Score Variation in Time',
                                 color: 'white'
                             },
                             legend: {
@@ -92,7 +93,53 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 beginAtZero: true,
                                 title:{
                                     display:true,
-                                    text: 'Scor',
+                                    text: 'Score',
+                                    color: 'white'
+                                },
+                                ticks: {
+                                    color: 'white'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: 'white'
+                                }
+                            }
+                        }
+                    }
+                });
+                new Chart(document.getElementById('levelChart'),{
+                    type: 'line',
+                    data:{
+                        labels: seqLabels,
+                        datasets: [{
+                            label: 'Sequence',
+                            data: maxSeq,
+                            borderColor: 'rgb(75,192,192)',
+                            tension: 0.1,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Maximum sequence',
+                                color: 'white'
+                            },
+                            legend: {
+                                labels:{
+                                    color: 'white'
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title:{
+                                    display:true,
+                                    text: 'Level',
                                     color: 'white'
                                 },
                                 ticks: {
