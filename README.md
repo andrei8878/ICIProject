@@ -16,9 +16,9 @@
 Acest proiect vizeaza implementarea digitala a celebrului **test neuropsihologic Corsi Block Tapping Test**.  
 Obiectivul principal este crearea unei aplicatii web accesibile care sa evalueze **memoria vizuo-spatiala**.
 
-![Preview](https://imgur.com/a/bOwZIsF)
-![Preview](https://imgur.com/a/YVTT4vJ)
-![Preview](https://imgur.com/a/ppTfesy)
+![Preview](https://i.imgur.com/KTYC1ch.jpeg)
+![Preview](https://i.imgur.com/Bi9wlUs.png)
+![Preview](https://i.imgur.com/BHxyTMR.jpeg)
 
 ---
 
@@ -51,7 +51,7 @@ Solutia a fost construita utilizand urmatoarele tehnologii:
 | :--- | :--- | :--- |
 | **Backend** | `[Python / Flask]` | API-ul principal si logica. |
 | **Frontend** | `[HTML / CSS / JavaScript]` | Interfata cu utilizatorul. |
-| **Database (simplu)** | `[Fisier CSV]` | Stocarea persistenta a datelor. |
+| **Database (pseudo)** | `[Fisier CSV]` | Stocarea persistenta a datelor. |
 
 
 
