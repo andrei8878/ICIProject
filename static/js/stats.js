@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 const maxSeq = maxSequence.map(val=>parseInt(val));
                 //Etichete
                 const gameLabels = Array.from({length:gameScores.length},(_, i)=> `Game${i+1}`);
-                const seqLabels = Array.from({length:maxSeq.length},(_,i)=> `Sequence${i+1}`);
+                const seqLabels = Array.from({length:maxSeq.length},(_,i)=> `Game${i+1}`);
                 new Chart(document.getElementById('scoreChart'),{
                     type: 'line',
                     data:{
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     data:{
                         labels: seqLabels,
                         datasets: [{
-                            label: 'Sequence',
+                            label: 'Game ',
                             data: maxSeq,
                             borderColor: 'rgb(75,192,192)',
                             tension: 0.1,
