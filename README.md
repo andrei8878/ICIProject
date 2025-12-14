@@ -97,7 +97,7 @@ Urmează pașii de mai jos pentru a rula proiectul local.
 
 ### 👤 Autor
 
-**Andrei**
+**Barau Andrei Cristian**
 * GitHub: [@andrei8878](https://github.com/andrei8878)
 
 ---
