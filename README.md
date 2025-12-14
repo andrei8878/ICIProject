@@ -18,7 +18,7 @@ Obiectivul principal este crearea unei aplicatii web accesibile care sa evalueze
 
 ![Preview](https://i.imgur.com/KTYC1ch.jpeg)
 ![Preview](https://i.imgur.com/Bi9wlUs.png)
-![Preview](https://i.imgur.com/BHxyTMR.jpeg)
+![Preview](https://i.imgur.com/6EJmYDs.jpeg)
 
 ---
 
