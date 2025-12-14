@@ -103,10 +103,10 @@ function generateSequence(){
     }
 
 }
-
+//Afisam secventa
 async function showSequence(){
     stopTimer();
-    await new Promise(timer => setTimeout(timer,200));
+    await new Promise(timer => setTimeout(timer,200)); //asteptam 200 ms
     gamewindowH1.textContent = "Wait...";
     gamewindowH1.style.color = "#e83c4a";
     isPlaying = false;
@@ -114,6 +114,7 @@ async function showSequence(){
         console.log("Cell:"+currentSeq[i]);
         const cell = document.getElementById(`c${currentSeq[i]}`);
         if (cell){
+            //dam highlight la fiecare celula din secventa si dupa ii dam remove
             cell.classList.add("highlight");
             await new Promise(timer => setTimeout(timer,highlightDuration));
             cell.classList.remove("highlight");
@@ -258,12 +259,12 @@ function redirectMoreData(){
 }
 
 function sendDataBackend(){
-    fetch(`/api/save`,{
+    fetch(`/api/save`,{ // trimitem fetch catre route-u /api/save pt flask
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json' // in format .json
         },
-        body: JSON.stringify({
+        body: JSON.stringify({// ce trimitem catre flask
             game_id:game_id,
             game_score:gameScore,
             best_score:bestScore,
@@ -272,8 +273,8 @@ function sendDataBackend(){
             timestr:timestr
         })
     })
-    .then(response => response.json())
-    .then(data =>{
+    .then(response => response.json()) // ce primim de la flask
+    .then(data =>{ // prelucram datele
         console.log('[FLASK] R:',data);
         if(data.status === "newbest"){
             gameOver_bestScore.textContent = data.best_score;
@@ -282,10 +283,14 @@ function sendDataBackend(){
             session_id = data.session_id;
         }
     })
-    .catch((error) => {
+    .catch((error) => {// in caz de eroare
         console.error('[FETCH] Error:',error);
     });
 }
+
+
+//Functie pentru resetarea datelor locale (poate fi implementata rapid pe un buton cu un addeventlistener)
+//A fost folosita pentru debug
 
 function resetDataBackend(){
     fetch('/api/reset',{

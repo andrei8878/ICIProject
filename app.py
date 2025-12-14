@@ -177,7 +177,7 @@ def updateUserDataCSV(game_id, current_best,game_score,totaltime,time,maxSequenc
     data = { #dictionar cu date despre valorile primite din fetch
         "Session ID":session_id,
         "Game ID":game_id,
-        "Rating":rating(game_id,game_score),
+        "Rating":rating(game_id,game_score,maxSequence),
         "Game Score":game_score,
         "Best Score":current_best,
         "Max Sequence":maxSequence,
@@ -201,15 +201,15 @@ def formatCSV(fieldnamedict,fieldnames,widths):
     return line + "\n"
 
 #Sistem de rating bazat pe fiecare joc
-def rating(game_id,game_score):
+def rating(game_id,game_score,seq):
     if game_id == "corsiblock":
-        if game_score >= 5000:
+        if game_score >= 5000 or seq >= 9:
             return "genius"
-        elif game_score >= 3000:
+        elif game_score >= 3000 or seq >= 7:
             return "impressive"
-        elif game_score >= 1500:
+        elif game_score >= 1500 or seq >= 5:
             return "good"
-        elif game_score >= 500:
+        elif game_score >= 500 or seq <5:
             return "bad"
         else: 
             return "None"
@@ -288,9 +288,6 @@ def readDataCSV(game_id,game_session):
     return result
         
         
-
-
-
 
 
 
